@@ -51,10 +51,18 @@ Este projeto demonstra a implementação de:
 **Local**
 
 ```bash
-dotnet run --project Tree.Console
+docker compose up --build
 ```
 
-Isso executará o traversal no console e aguardará uma tecla ao final.
+Esse comando:
+
+- Cria o volume tree_storage (se não existir)
+
+- Monta o volume em /app/storage dentro do container
+
+- Executa o console app com --nowait
+
+- Mantém os arquivos salvos no volume entre execuções
 
 ## Docker
 
