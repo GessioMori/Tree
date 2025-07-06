@@ -1,7 +1,7 @@
 ﻿using Tree.Core.Domain;
 using Tree.Core.Domain.Interfaces;
 
-namespace Tree.Tests.Mocks;
+namespace Tree.Tests.Core.Mocks;
 
 public class FakeMonitor : IMonitor
 {

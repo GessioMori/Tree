@@ -1,13 +1,13 @@
 ﻿using Tree.Core.Domain;
 
-namespace Tree.Tests.ComponentTests;
+namespace Tree.Tests.Core.ComponentTests;
 
 public class ComponentTests
 {
     [Fact]
     public void AddChild_ShouldAddToChildren()
     {
-        CompositeNode parent = new("Parent");
+        Branch parent = new("Parent");
         Leaf child = new("Leaf1", "text");
 
         parent.Add(child);

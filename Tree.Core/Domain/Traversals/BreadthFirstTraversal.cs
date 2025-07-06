@@ -15,7 +15,7 @@ public class BreadthFirstTraversal(IPrintStrategy printStrategy, IMonitor monito
 
             NotifyAndPrint(node, depth);
 
-            if (node is CompositeNode composite)
+            if (node is Branch composite)
             {
                 foreach (Component child in composite.Children)
                 {

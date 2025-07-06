@@ -4,8 +4,8 @@ namespace Tree.Core.Domain;
 
 public class TreeBuilder : ITreeBuilder
 {
-    private readonly Stack<CompositeNode> _nodeStack = new();
-    private readonly CompositeNode _root;
+    private readonly Stack<Branch> _nodeStack = new();
+    private readonly Branch _root;
 
     public TreeBuilder(string rootName)
     {
@@ -15,7 +15,7 @@ public class TreeBuilder : ITreeBuilder
 
     public ITreeBuilder AddNode(string name)
     {
-        CompositeNode node = new(name);
+        Branch node = new(name);
         this._nodeStack.Peek().Add(node);
         this._nodeStack.Push(node);
         return this;

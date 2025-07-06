@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree.Tests", "Tree.Tests\Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree.ConsoleApp", "Tree.ConsoleApp\Tree.ConsoleApp.csproj", "{C9F01065-2A28-4D2D-ABDA-49ED3D3F9CA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree.Persistence", "Tree.Persistence\Tree.Persistence.csproj", "{2A561B0D-DCD0-497D-B7FB-A3B905B2A7EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C9F01065-2A28-4D2D-ABDA-49ED3D3F9CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9F01065-2A28-4D2D-ABDA-49ED3D3F9CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9F01065-2A28-4D2D-ABDA-49ED3D3F9CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A561B0D-DCD0-497D-B7FB-A3B905B2A7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A561B0D-DCD0-497D-B7FB-A3B905B2A7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A561B0D-DCD0-497D-B7FB-A3B905B2A7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A561B0D-DCD0-497D-B7FB-A3B905B2A7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

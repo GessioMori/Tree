@@ -14,7 +14,7 @@ public class PreOrderTraversal(IPrintStrategy printStrategy, IMonitor monitor) :
     {
         NotifyAndPrint(node, depth);
 
-        if (node is CompositeNode composite)
+        if (node is Branch composite)
         {
             foreach (Component child in composite.Children)
             {

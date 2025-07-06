@@ -15,7 +15,7 @@ public class DepthFirstTraversal(IPrintStrategy printStrategy, IMonitor monitor)
 
             NotifyAndPrint(node, depth);
 
-            if (node is CompositeNode composite)
+            if (node is Branch composite)
             {
                 for (int i = composite.Children.Count - 1; i >= 0; i--)
                 {

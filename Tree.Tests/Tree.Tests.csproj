@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tree.Core\Tree.Core.csproj" />
+    <ProjectReference Include="..\Tree.Persistence\Tree.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,4 +2,4 @@
 
 namespace Tree.Core.Domain;
 
-public class CompositeNode(string name) : Component(name);
+public class Branch(string name) : Component(name);

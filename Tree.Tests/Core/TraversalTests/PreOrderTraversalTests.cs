@@ -1,8 +1,8 @@
 ﻿using Tree.Core.Domain;
 using Tree.Core.Domain.Traversals;
-using Tree.Tests.Mocks;
+using Tree.Tests.Core.Mocks;
 
-namespace Tree.Tests.TraversalTests;
+namespace Tree.Tests.Core.TraversalTests;
 
 public class PreOrderTraversalTests
 {
