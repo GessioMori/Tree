@@ -11,6 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Tree.ConsoleApp/Tree.ConsoleApp.csproj", "Tree.ConsoleApp/"]
+COPY ["Tree.Core/Tree.Core.csproj", "Tree.Core/"]
 RUN dotnet restore "./Tree.ConsoleApp/Tree.ConsoleApp.csproj"
 COPY . .
 WORKDIR "/src/Tree.ConsoleApp"
@@ -25,4 +26,4 @@ RUN dotnet publish "./Tree.ConsoleApp.csproj" -c $BUILD_CONFIGURATION -o /app/pu
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Tree.ConsoleApp.dll", "--nowait"]
+ENTRYPOINT ["dotnet", "Tree.ConsoleApp.dll"]

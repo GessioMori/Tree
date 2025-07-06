@@ -1,0 +1,12 @@
+services:
+  tree.consoleapp:
+    image: ${DOCKER_REGISTRY-}treeconsoleapp
+    build:
+      context: .
+      dockerfile: Tree.ConsoleApp/Dockerfile
+    volumes:
+      - tree_storage:/app/storage
+
+volumes:
+  tree_storage:
+    name: tree_storage
