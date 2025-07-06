@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Tree.ConsoleApp": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "commandLineArgs": "--nowait"
+    }
+  }
+}
