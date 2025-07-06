@@ -8,13 +8,22 @@ internal class Program
 {
     private static async Task Main(string[] args)
     {
-        const string storagePath = "/app/storage";
+        string storagePath = "/app/storage";
+        string? pathArg = args.FirstOrDefault(a => !a.StartsWith("--"));
+        if (!string.IsNullOrWhiteSpace(pathArg))
+        {
+            storagePath = pathArg;
+        }
 
-        string[] jsonFiles = Directory.GetFiles(storagePath, "*.json");
+        bool nowait = args.Any(a => a.Equals("--nowait", StringComparison.OrdinalIgnoreCase));
+
+        string[] jsonFiles = Directory.Exists(storagePath)
+            ? Directory.GetFiles(storagePath, "*.json")
+            : [];
 
         if (jsonFiles.Length == 0)
         {
-            Console.WriteLine("Nenhum arquivo JSON encontrado em " + storagePath);
+            Console.WriteLine($"\nNenhum arquivo JSON encontrado em {storagePath}");
             return;
         }
 
@@ -29,9 +38,16 @@ internal class Program
 
             Component tree = await repo.LoadAsync(jsonFile);
 
-            Console.WriteLine("Percorrendo árvore restaurada:");
+            Console.WriteLine("\nPercorrendo árvore restaurada:");
             traversal.Traverse(tree);
             Console.WriteLine($"\nTraversal do arquivo {jsonFile} concluído.");
+        }
+
+
+        if (!nowait)
+        {
+            Console.WriteLine("\nPressione qualquer tecla para encerrar...");
+            Console.ReadKey();
         }
     }
 }

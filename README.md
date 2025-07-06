@@ -9,79 +9,124 @@
 Este projeto demonstra a implementação de:
 
 - Estruturas de árvore usando *composite pattern*
-- Várias estratégias de percurso (*pre-order, DFS, BFS*)
-- Estratégias de impressão personalizadas (*print strategy pattern*)
-- Persistência com serialização JSON via *repository pattern*
-- Mapeamento de DTOs para facilitar exportação/importação
-- Projeto de testes automatizados com xUnit
-- Docker-ready
+- Estratégias de impressão desacopladas (*print strategy pattern*)
+- Monitoramento de execução (*observer pattern*)
+- Diferentes percursos (*pre-order, depth-first, breadth-first*)
+- Serialização JSON com *repository pattern*
+- Mapeamento de DTOs para exportação/importação
+- Projeto de testes automatizados (xUnit)
+- Pronto para execução via Docker
 
 ---
 
 ## Estrutura de projetos
 
 - **TreeTraversal.Core**  
-  Contém a estrutura de domínio, percursos, estratégias de impressão e monitoramento.
+  Contém o modelo de domínio, estratégias de impressão, monitoramento e percursos.
 
 - **TreeTraversal.Tests**  
-  Contém testes unitários com xUnit para validação dos percursos e monitoramentos.
+  Contém os testes automatizados para as regras de negócio.
 
 - **Tree.Persistence**  
-  Contém repositórios para serialização (JSON) e DTOs de transporte.
+  Responsável pela serialização JSON, DTOs e repositórios.
 
 - **Tree.Console**  
-  Exemplo de aplicação de console para executar a árvore e visualizar percursos.
+  Aplicação console para executar os exemplos e ler arquivos persistidos.
 
 ---
 
 ## Recursos
 
-✅ Árvores heterogêneas (nós e folhas)  
-✅ Impressão extensível (via `IPrintStrategy`)  
-✅ Monitoramento independente (via `IMonitor`)  
-✅ Vários tipos de percurso (pre-order, depth-first, breadth-first)  
-✅ Builder para montagem fluida da árvore  
-✅ Serialização / desserialização em JSON  
-✅ Suporte a Docker, com parâmetro `--nowait` para execução sem bloqueio
+- Árvores heterogêneas (nós e folhas)  
+- Impressão extensível via `IPrintStrategy`  
+- Monitoramento desacoplado via `IMonitor`  
+- Percursos variados (pre-order, depth-first, breadth-first)  
+- Builder fluido para montagem de árvores  
+- Serialização / desserialização JSON  
+- Suporte a Docker com volumes  
+- Argumentos flexíveis para indicar diretório e modo sem bloqueio
 
 ---
 
 ## Executando
 
-**Local**
+### Com Docker Compose
 
 ```bash
 docker compose up --build
-```
+````
 
-Esse comando:
+* Cria o volume `tree_storage` automaticamente (se não existir)
+* Monta o volume em `/app/storage` dentro do container
+* Passa o argumento `--nowait` para evitar bloqueio com `Console.ReadKey()`
+* Todos arquivos JSON persistem no volume entre execuções
 
-- Cria o volume tree_storage (se não existir)
-
-- Monta o volume em /app/storage dentro do container
-
-- Executa o console app com --nowait
-
-- Mantém os arquivos salvos no volume entre execuções
-
-## Docker
+### Com Docker manual
 
 ```bash
 docker build -t treeconsole .
-docker run --rm treeconsole --nowait
+docker run --rm -v tree_storage:/app/storage treeconsole --nowait
 ```
 
-## Testes
-Execute todos os testes do projeto:
+Você pode adicionar argumentos extras, por exemplo caminho do storage:
+
 ```bash
-dotnet test
+docker run --rm -v tree_storage:/app/storage treeconsole "/app/storage" --nowait
 ```
+
+---
+
+## Execução em ambiente de desenvolvimento (Visual Studio)
+
+* Sem argumentos → usa o caminho padrão `/app/storage`
+* Sem `--nowait` → aguarda pressionar uma tecla após a execução, facilitando o debug
+
+Para passar argumentos no debug, configure o `launchSettings.json`:
+
+```json
+{
+  "profiles": {
+    "Tree.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "--nowait"
+    }
+  }
+}
+```
+
+---
+
+## Como funcionam os volumes
+
+* O volume `tree_storage` armazena os arquivos JSON
+* Mesmo ao destruir o container, o volume persiste
+* Para inspecionar manualmente:
+
+  ```bash
+  docker run --rm -it -v tree_storage:/app/storage alpine sh
+  ```
+
+  dentro do shell, navegue para `/app/storage`.
+
+---
 
 ## Persistência
-Para salvar e restaurar a árvore de forma simples:
+
+Para salvar e restaurar a árvore de forma programática:
+
 ```csharp
 ITreeRepository repository = new JsonTreeRepository();
 await repository.SaveAsync(tree, "tree.json");
 
 var restored = await repository.LoadAsync("tree.json");
+```
+
+---
+
+## Testes
+
+Execute todos os testes:
+
+```bash
+dotnet test
 ```

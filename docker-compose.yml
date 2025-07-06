@@ -6,6 +6,7 @@ services:
       dockerfile: Tree.ConsoleApp/Dockerfile
     volumes:
       - tree_storage:/app/storage
+    command: --nowait
 
 volumes:
   tree_storage:
